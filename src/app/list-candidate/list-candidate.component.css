@@ -1,0 +1,20 @@
+.container{
+    margin-top: 3%
+    }
+
+    .btn-primary{
+        margin-top: 2%;
+        margin-left: 8%;
+        
+    }
+    .btn-success{
+        margin-right: 5%;
+    }
+   
+    .btn-danger{
+        margin-top: 2%;
+        margin-left: 1%;
+    }
+    #delete{
+        margin-top: 0%;
+    }
