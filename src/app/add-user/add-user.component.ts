@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-//import 'rxjs/add/operator/toPromise';
 import { HttpClientModule } from '@angular/common/http';
 import { CrudServiceService } from '../crud-service.service';
 import { stringify } from '@angular/compiler/src/util';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -31,7 +33,7 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      const id = params['id'];
+      const id = params['Id'];
       this.id = id;
       if (id != undefined || id != null) { this.operation = "update" }
       console.log("id======", id);
@@ -41,10 +43,10 @@ export class AddUserComponent implements OnInit {
       let data = { "id": this.id }
       console.log(data);
       this.crudservice.selectSingleRecord(data).subscribe((res: any) => {
-        console.log("RES of selectUser:::::", res[0])
-        this.model.name = res[0].FirstName;
-        this.model.email = res[0].Email;
-        this.model.contact = res[0].Contact;
+        console.log("RES of selectUser:::::", res)
+        this.model.name = res.FirstName;
+        this.model.email = res.Email;
+        this.model.contact = res.Contact;
       });
     } else { console.log("NEW USER") }
   }
@@ -67,6 +69,7 @@ export class AddUserComponent implements OnInit {
       this.crudservice.insertData(data).subscribe((res: any) => {
         console.log("RES of insert:::::", res)
         this.route.navigate(['/list-candidate'])
+        //this.toastr.success('Hello world!', 'Toastr fun!');
       });
     } else if (this.operation == "update") {
       let data = {
@@ -86,5 +89,7 @@ export class AddUserComponent implements OnInit {
   save(form: NgForm) {
     console.log(form.value);
   }
+
+
 
 }
